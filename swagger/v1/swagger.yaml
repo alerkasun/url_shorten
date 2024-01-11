@@ -1,0 +1,73 @@
+---
+openapi: 3.0.1
+info:
+  title: API V1
+  version: v1
+paths:
+  "/api/links":
+    post:
+      summary: Creates a link
+      tags:
+      - Links
+      parameters: []
+      responses:
+        '201':
+          description: link created
+        '422':
+          description: invalid request
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                original_url:
+                  type: string
+              required:
+              - original_url
+    get:
+      summary: Retrieves all links
+      tags:
+      - Links
+      responses:
+        '200':
+          description: links found
+  "/api/links/{short_url}":
+    delete:
+      summary: Deletes a link
+      tags:
+      - Links
+      parameters:
+      - name: short_url
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: password
+        in: query
+        schema:
+          type: string
+      responses:
+        '403':
+          description: invalid link or password
+  "/{short_url}":
+    get:
+      summary: Redirects to the original URL
+      tags:
+      - Redirection
+      parameters:
+      - name: short_url
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '302':
+          description: redirected to original URL
+        '404':
+          description: not found
+servers:
+- url: http://localhost:3000
+  variables:
+    defaultHost:
+      default: localhost:3000
