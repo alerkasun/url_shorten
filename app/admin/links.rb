@@ -22,7 +22,7 @@ ActiveAdmin.register Link do
     selectable_column
     id_column
     column :original_url do |link|
-      div style: "max-width: 200px;" do
+      div style: "word-break: break-word;" do
         link.original_url
       end
     end
