@@ -1,8 +1,7 @@
 class Link < ApplicationRecord
-  attr_accessor :generated_password
   before_create :generate_short_url, :generate_password
 
-  validates :original_url, original_url: true
+  validates :original_url, custom_url: true
   validates :short_url, uniqueness: true
   validates :visit_count, numericality: { greater_than_or_equal_to: 0 }
 
