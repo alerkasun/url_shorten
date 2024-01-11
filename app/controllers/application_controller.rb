@@ -2,7 +2,7 @@ class ApplicationController < ActionController::Base
   include ErrorRenderable
 
   def authenticate_admin
-    authenticate_or_request_with_http_basic("Whatever") do |name, password|
+    authenticate_or_request_with_http_basic do |name, password|
       name == "admin" && password == "admin"
     end
   end
